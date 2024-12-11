@@ -8,7 +8,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto';
+import { CreateCatDto } from './dto/create-cat.dto';
+// import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto';
 
 @Controller('cats')
 export class CatsController {
