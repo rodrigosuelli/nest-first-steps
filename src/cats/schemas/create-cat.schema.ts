@@ -8,11 +8,4 @@ export const createCatSchema = z
   })
   .required();
 
-type RequiredCreateCatDto = {
-  [K in keyof z.infer<typeof createCatSchema>]-?: z.infer<
-    typeof createCatSchema
-  >[K];
-};
-
-export type CreateCatDto = RequiredCreateCatDto;
-// export type CreateCatDto = z.infer<typeof createCatSchema>;
+export type CreateCatDto = z.infer<typeof createCatSchema>;
