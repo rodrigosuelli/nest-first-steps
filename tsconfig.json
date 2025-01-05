@@ -14,6 +14,7 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    // Zod library requires the strictNullChecks configuration to be enabled in your tsconfig.json file
     // True by default when using `strict` option
     "strictNullChecks": true,
     "noImplicitAny": false,
