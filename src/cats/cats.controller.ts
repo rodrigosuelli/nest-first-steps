@@ -5,12 +5,15 @@ import {
   Body,
   BadRequestException,
   UseFilters,
+  Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { ForbiddenException } from 'src/forbidden.exception';
 import { HttpExceptionFilter } from './http-exception.filter';
+import { BaseExceptionFilter } from '@nestjs/core';
 
 @Controller('cats')
 @UseFilters(HttpExceptionFilter)
@@ -28,6 +31,12 @@ export class CatsController {
         description: error.message,
       });
     }
+  }
+
+  @Get(':id')
+  @UseFilters(BaseExceptionFilter)
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.catsService.findOne(id);
   }
 
   @Get()
