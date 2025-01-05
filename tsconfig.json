@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    // Why nestjs dont use `strict` option by default?
+    // "strict": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -12,6 +14,7 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    // True by default when using `strict` option
     "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
