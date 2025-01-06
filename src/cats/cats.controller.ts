@@ -8,7 +8,6 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-// import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { ForbiddenException } from 'src/forbidden.exception';
