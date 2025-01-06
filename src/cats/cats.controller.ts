@@ -23,7 +23,7 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
+  async create(@Body(ValidationPipe) createCatDto: CreateCatDto) {
     try {
       this.catsService.create(createCatDto);
       // throw new Error('Test error');
