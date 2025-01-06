@@ -7,7 +7,6 @@ import {
   UseFilters,
   Param,
   ParseIntPipe,
-  UsePipes,
 } from '@nestjs/common';
 // import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
@@ -15,8 +14,8 @@ import { Cat } from './interfaces/cat.interface';
 import { ForbiddenException } from 'src/forbidden.exception';
 import { HttpExceptionFilter } from './http-exception.filter';
 import { BaseExceptionFilter } from '@nestjs/core';
-import { CreateCatDto, createCatSchema } from './schemas/create-cat.schema';
-import { ZodValidationPipe } from 'src/common/pipe/zod-validation.pipe';
+import { ValidationPipe } from 'src/common/pipe/validation.pipe';
+import { CreateCatDto } from './dto/create-cat.dto';
 
 @Controller('cats')
 @UseFilters(HttpExceptionFilter)
@@ -24,11 +23,10 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  @UsePipes(new ZodValidationPipe(createCatSchema))
-  async create(@Body() createCatDto: CreateCatDto) {
+  async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     try {
       this.catsService.create(createCatDto);
-      throw new Error('Test error');
+      // throw new Error('Test error');
     } catch (error) {
       throw new BadRequestException('Something bad happened', {
         cause: error,
