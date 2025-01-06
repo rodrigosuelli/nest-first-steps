@@ -13,7 +13,9 @@ export class CatsService {
     return this.cats[id];
   }
 
-  findAll(): Cat[] {
+  findAll({ activeOnly, page }: { activeOnly: boolean; page: number }): Cat[] {
+    console.log(activeOnly);
+    console.log(page);
     return this.cats;
   }
 }

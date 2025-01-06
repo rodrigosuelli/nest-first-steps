@@ -7,6 +7,9 @@ import {
   UseFilters,
   Param,
   ParseIntPipe,
+  Query,
+  DefaultValuePipe,
+  ParseBoolPipe,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
@@ -41,10 +44,14 @@ export class CatsController {
   }
 
   @Get()
-  async findAll(): Promise<Cat[]> {
+  async findAll(
+    @Query('activeOnly', new DefaultValuePipe(false), ParseBoolPipe)
+    activeOnly: boolean,
+    @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
+  ): Promise<Cat[]> {
     try {
-      this.catsService.findAll();
-      throw new BadRequestException();
+      return this.catsService.findAll({ activeOnly, page });
+      // throw new BadRequestException();
     } catch (error) {
       throw new ForbiddenException();
     }
